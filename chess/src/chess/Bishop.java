@@ -6,19 +6,7 @@ class Bishop extends BasePiece {
     }
 
     @Override
-    public boolean checkAndDoMove(Board board, int oldX, int oldY, int newX, int newY) {
-        if(!isMoveBasicallyViable(board, oldX, oldY, newX, newY)) {
-            return false;
-        }
-
-        if(Math.abs(newX - oldX) == Math.abs(newY - oldY) && doesNotPassDiaAheadOfPiece(board, oldX, oldY, newX, newY)) {
-            doMove(board, oldX, oldY, newX, newY);
-
-            return true;
-        }
-
-        return false;
+    public boolean canDoMove(Board board, int oldX, int oldY, int newX, int newY) {
+        return isMoveBasicallyViable(board, oldX, oldY, newX, newY) && (Math.abs(newX - oldX) == Math.abs(newY - oldY) && doesNotPassDiaAheadOfPiece(board, oldX, oldY, newX, newY));
     }
-
-
 }

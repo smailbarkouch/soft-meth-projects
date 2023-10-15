@@ -8,24 +8,11 @@ class King extends BasePiece {
 
     @Override
     public boolean canDoMove(Board board, int oldX, int oldY, int newX, int newY) {
-        return false;
-    }
-
-    @Override
-    public boolean checkAndDoMove(Board board, int oldX, int oldY, int newX, int newY) {
-        if(!isMoveBasicallyViable(board, oldX, oldY, newX, newY)) {
-            return false;
-        }
-
         int diffX = Math.abs(newX - oldX);
         int diffY = Math.abs(newY - oldY);
 
-        if(diffX == 1 && (diffY == 1 || diffY == 0) || diffY == 1 && diffX == 0) {
-            doMove(board, oldX, oldY, newX, newY);
+        boolean regMovement = ((diffX == 1 && (diffY == 1 || diffY == 0) || diffY == 1 && diffX == 0));
 
-            return true;
-        }
-
-        return false;
+        return isMoveBasicallyViable(board, oldX, oldY, newX, newY) && regMovement; // don't check for castling cause we do it in the basepiece
     }
 }

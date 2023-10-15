@@ -7,19 +7,7 @@ class Rook extends BasePiece {
     }
 
     @Override
-    public boolean checkAndDoMove(Board board, int oldX, int oldY, int newX, int newY) {
-        if(!isMoveBasicallyViable(board, oldX, oldY, newX, newY)) {
-            return false;
-        }
-
-        if(((newX != oldX && newY == oldY) || (newX == oldX && newY != oldY)) && doesNotPassPerpAheadOfPiece(board, oldX, oldY, newX, newY)) {
-            doMove(board, oldX, oldY, newX, newY);
-
-            return true;
-        }
-
-        return false;
+    public boolean canDoMove(Board board, int oldX, int oldY, int newX, int newY) {
+        return isMoveBasicallyViable(board, oldX, oldY, newX, newY) && (((newX != oldX && newY == oldY) || (newX == oldX && newY != oldY)) && doesNotPassPerpAheadOfPiece(board, oldX, oldY, newX, newY));
     }
-
-
 }

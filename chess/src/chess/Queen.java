@@ -7,18 +7,18 @@ class Queen extends BasePiece {
     }
 
     @Override
-    public boolean checkAndDoMove(Board board, int oldX, int oldY, int newX, int newY) {
-        if(!isMoveBasicallyViable(board, oldX, oldY, newX, newY)) {
-            return false;
-        }
+    public boolean canDoMove(Board board, int oldX, int oldY, int newX, int newY) {
+//        System.out.printf("checking queen moves: %b && ((%d == %d && %b) || (((%b && %b) || (%b && %b)) && %b)%n",
+//                isMoveBasicallyViable(board, oldX, oldY, newX, newY),
+//                Math.abs(newX - oldX), Math.abs(newY - oldY),
+//                doesNotPassDiaAheadOfPiece(board, oldX, oldY, newX, newY),
+//                newX != oldX,
+//                newY == oldY,
+//                newX == oldX,
+//                newY != oldY,
+//                doesNotPassPerpAheadOfPiece(board, oldX, oldY, newX, newY));
 
-        if((Math.abs(newX - oldX) == Math.abs(newY - oldY) && doesNotPassDiaAheadOfPiece(board, oldX, oldY, newX, newY))
-                || ((newX != oldX && newY == oldY) || (newX == oldX && newY != oldY)) && doesNotPassPerpAheadOfPiece(board, oldX, oldY, newX, newY)) {
-            doMove(board, oldX, oldY, newX, newY);
-
-            return true;
-        }
-
-        return false;
+        return isMoveBasicallyViable(board, oldX, oldY, newX, newY) && ((Math.abs(newX - oldX) == Math.abs(newY - oldY) && doesNotPassDiaAheadOfPiece(board, oldX, oldY, newX, newY))
+                || (((newX != oldX && newY == oldY) || (newX == oldX && newY != oldY)) && doesNotPassPerpAheadOfPiece(board, oldX, oldY, newX, newY)));
     }
 }
