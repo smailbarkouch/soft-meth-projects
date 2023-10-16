@@ -1,3 +1,5 @@
+//Smail Barkouch, Rahul Bhalla
+
 package chess;
 
 import java.util.ArrayList;
