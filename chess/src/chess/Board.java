@@ -142,15 +142,13 @@ class Board {
             return false;
         }
 
-        boolean isAnyMoveViable = false;
-
         // check if king can escape threat (or capture threat themselves)
         for(int x = -1; x < 2; x++) {
             for(int y = -1; y < 2; y++) {
-                if(!isAnyMoveViable && king.piece.checkFutureMoveViable(this, king.x, king.y, king.x + x, king.y + y)) {
-                    isAnyMoveViable = true;
+                if(king.piece.checkFutureMoveViable(this, king.x, king.y, king.x + x, king.y + y)) {
+                    return false;
                 }
-                System.out.printf("checking %d %d %b%n", king.x + x, king.y + y, isAnyMoveViable);
+                System.out.printf("checking %d %d", king.x + x, king.y + y);
             }
         }
 
@@ -158,14 +156,14 @@ class Board {
         for(int x = 0; x < 8; x++) {
             for(int y = 0; y < 8; y++) {
                 if(spaces[x][y].piece != null && spaces[x][y].piece.isWhite() == isWhite) {
-                    if(!isAnyMoveViable && spaces[x][y].piece.canDoMove(this, x, y, concernX, concernY)) {
-                        isAnyMoveViable = true;
+                    if(spaces[x][y].piece.canDoMove(this, x, y, concernX, concernY)) {
+                        return false;
                     }
                 }
             }
         }
 
-        return !isAnyMoveViable;
+        return true;
     }
 
     public ArrayList<ReturnPiece> getPiecesOnBoard() {
