@@ -155,12 +155,12 @@ class Board {
         // check if some team piece can capture threat
         for(int x = 0; x < 8; x++) {
             for(int y = 0; y < 8; y++) {
+                if (spaces[x][y] == king) {
+                    continue;
+                }
                 if(spaces[x][y].piece != null && spaces[x][y].piece.isWhite() == isWhite) {
                     if(spaces[x][y].piece.canDoMove(this, x, y, concernX, concernY)) {
                         System.out.println(x + " " + y);
-                        if(!king.piece.checkFutureMoveViable(this, king.x, king.y, king.x + x, king.y + y)) {
-                            continue;
-                        }
                         return false;
                     }
                 }

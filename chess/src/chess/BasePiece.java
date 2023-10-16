@@ -244,6 +244,10 @@ abstract class BasePiece {
 
     public boolean isEmpassantViable(Board board, int oldX, int oldY, int newX, int newY) {
         int negativeComponent = isWhite() ? 1 : -1;
+        if(newY - negativeComponent < 0 || newY - negativeComponent > 7) {
+            return false;
+        }
+
         BasePiece maybePawn = board.spaces[oldX][oldY].piece;
         BasePiece maybeCapturedPawn = board.spaces[newX][newY - negativeComponent].piece;
 
