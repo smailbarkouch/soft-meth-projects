@@ -245,13 +245,16 @@ abstract class BasePiece {
     public boolean isEmpassantViable(Board board, int oldX, int oldY, int newX, int newY) {
         int negativeComponent = isWhite() ? 1 : -1;
         BasePiece maybePawn = board.spaces[oldX][oldY].piece;
+        BasePiece maybeCapturedPawn = board.spaces[newX][newY - negativeComponent].piece;
 
         return newY - oldY == negativeComponent
                 && Math.abs(newX - oldX) == 1
                 && board.spaces[newX][newY].piece == null
                 && maybePawn instanceof Pawn
+                && maybeCapturedPawn instanceof Pawn
                 && board.spaces[newX][newY - negativeComponent].piece != null
-                && board.spaces[newX][newY - negativeComponent].piece.isWhite() != isWhite();
+                && board.spaces[newX][newY - negativeComponent].piece.isWhite() != isWhite()
+                && newY == (isWhite() ? 5 : 2);
     }
 
     public void promoteIfViable(Board board, int newX, int newY, String prom) {
