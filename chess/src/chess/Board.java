@@ -16,21 +16,21 @@ class Board {
 
         for(int i = 0; i < 2; i++) {
             spaces[0][i * 7].piece = new Rook(i == 0);
-//            spaces[1][i * 7].piece = new Knight(i == 0);
-//            spaces[2][i * 7].piece = new Bishop(i == 0);
+            spaces[1][i * 7].piece = new Knight(i == 0);
+            spaces[2][i * 7].piece = new Bishop(i == 0);
             spaces[3][i * 7].piece = new Queen(i == 0);
             spaces[4][i * 7].piece = new King(i == 0);
-//            spaces[5][i * 7].piece = new Bishop(i == 0);
-//            spaces[6][i * 7].piece = new Knight(i == 0);
+            spaces[5][i * 7].piece = new Bishop(i == 0);
+            spaces[6][i * 7].piece = new Knight(i == 0);
             spaces[7][i * 7].piece = new Rook(i == 0);
         }
 
         for(int i = 0; i < 8; i++) {
-//            spaces[i][1].piece = new Pawn(true);
+            spaces[i][1].piece = new Pawn(true);
         }
 
         for(int i = 0; i < 8; i++) {
-//            spaces[i][6].piece = new Pawn(false);
+            spaces[i][6].piece = new Pawn(false);
         }
     }
 
