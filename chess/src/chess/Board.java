@@ -7,6 +7,8 @@ class Board {
     boolean isWhiteTurn = true;
     boolean isGameOver = false;
 
+    long turn = 0;
+
     public Board() {
         for(int x = 0; x < 8; x++) {
             for(int y = 0; y < 8; y++) {
@@ -91,6 +93,8 @@ class Board {
 
             play.message = isDraw ? ReturnPlay.Message.DRAW : (isMoveCompromisingKing(isWhiteTurn) ? (isCheckmate(isWhiteTurn, newX, newY) ? (isWhiteTurn ? ReturnPlay.Message.CHECKMATE_BLACK_WINS : ReturnPlay.Message.CHECKMATE_WHITE_WINS) : ReturnPlay.Message.CHECK) : null);
             isGameOver = play.message != ReturnPlay.Message.CHECK && play.message != null;
+
+            turn++;
 
             return play;
         }

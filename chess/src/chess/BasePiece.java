@@ -42,6 +42,7 @@ abstract class BasePiece {
                 return false;
             }
 
+            notify2JumpIfPawn(board, oldX, oldY, newX, newY);
             promoteIfViable(board, newX, newY, prom);
             isInOGPos = false;
 
@@ -256,12 +257,19 @@ abstract class BasePiece {
                 && board.spaces[newX][newY].piece == null
                 && maybePawn instanceof Pawn
                 && maybeCapturedPawn instanceof Pawn
+                && ((Pawn) maybeCapturedPawn).last2JumpTurn == board.turn - 1
                 && board.spaces[newX][newY - negativeComponent].piece != null
                 && board.spaces[newX][newY - negativeComponent].piece.isWhite() != isWhite()
                 && newY == (isWhite() ? 5 : 2);
     }
 
-    public void promoteIfViable(Board board, int newX, int newY, String prom) {
+    public void notify2JumpIfPawn(Board board, int oldX, int oldY, int newX, int newY) {
+        if(oldX == newX && Math.abs(newY - oldY) == 2 && board.spaces[newX][newY].piece instanceof Pawn) {
+            ((Pawn) board.spaces[newX][newY].piece).last2JumpTurn = board.turn;
+        }
+    }
+
+        public void promoteIfViable(Board board, int newX, int newY, String prom) {
         if((newY == 7 && isWhite() || newY == 0 && !isWhite()) && board.spaces[newX][newY].piece instanceof Pawn) {
             switch (prom) {
                 case "", "Q" -> board.spaces[newX][newY].piece = new Queen(isWhite());

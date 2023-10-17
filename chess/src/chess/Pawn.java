@@ -2,6 +2,8 @@ package chess;
 
 class Pawn extends BasePiece {
 
+    long last2JumpTurn = -1;
+
     public Pawn(boolean isWhite) {
         super(isWhite ? ReturnPiece.PieceType.WP : ReturnPiece.PieceType.BP);
     }
